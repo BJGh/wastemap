@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "815940817053",
+    "project_id": "calory-calculator-f4259",
+    "storage_bucket": "calory-calculator-f4259.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815940817053:android:4ff7f27dd4479bedefc474",
+        "android_client_info": {
+          "package_name": "com.example.calory_calc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815940817053-3jp7amist94vhukb5r6f00a8rej110vv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJGFGKkUaAsc81DfiuP9sQZtR3aerlcaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815940817053-3jp7amist94vhukb5r6f00a8rej110vv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "815940817053-t4najqmqaveu5jn916cqn0o10e7rc6q2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.caloryCalc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
