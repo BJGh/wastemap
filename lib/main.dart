@@ -11,6 +11,7 @@ import 'package:calory_calc/services/shared_preference_services.dart';
 import 'package:calory_calc/helpers/theme.dart';
 import 'package:calory_calc/routers/router.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:calory_calc/screens/map/map.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -119,6 +120,11 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
         .push(MaterialPageRoute(builder: (context) => DayViewScreen()));
   }
 
+  void onClickMapScreenButton(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => MapScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle =
@@ -153,6 +159,11 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                   onClickSettingsScreenButton(context);
                 },
                 child: Text("Settings Screen")),
+            new ElevatedButton(
+                onPressed: () {
+                  onClickMapScreenButton(context);
+                },
+                child: Text("Map"))
           ],
         ));
   }

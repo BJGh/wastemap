@@ -57,6 +57,15 @@ dependencies:
   fl_chart: ^0.55.2
   openfoodfacts: ^1.8.3
   settings_ui: ^2.0.2
+  google_maps_flutter: ^2.2.5
+  google_maps_flutter_web: ^0.3.2+2
+  location: ^4.3.0
+  geolocator: ^7.1.0
+  flutter_map: ^3.1.0
+  flutter_map_marker_cluster: 1.1.0
+  latlong2: ^0.8.1
+  logging: ^1.1.0
+
 
 
   # The following adds the Cupertino Icons font to your application.

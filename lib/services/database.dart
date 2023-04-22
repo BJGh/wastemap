@@ -35,16 +35,20 @@ class DatabaseService {
 
   List<FoodTrackTask> _scanListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
+      var data = doc.data()
+          as Map<String, dynamic>; // added cast to Map<String, dynamic>
       return FoodTrackTask(
         id: doc.id,
-        food_name: doc['food_name'] ?? '',
-        calories: doc['calories'] ?? 0,
-        carbs: doc['carbs'] ?? 0,
-        fat: doc['fat'] ?? 0,
-        protein: doc['protein'] ?? 0,
-        mealTime: doc['mealTime'] ?? "",
-        createdOn: doc['createdOn'].toDate() ?? DateTime.now(),
-        grams: doc['grams'] ?? 0,
+        food_name: data.containsKey('food_name') ? data['food_name'] : '',
+        calories: data.containsKey('calories') ? data['calories'] : 0,
+        carbs: data.containsKey('carbs') ? data['carbs'] : 0,
+        fat: data.containsKey('fat') ? data['fat'] : 0,
+        protein: data.containsKey('protein') ? data['protein'] : 0,
+        mealTime: data.containsKey('mealTime') ? data['mealTime'] : "",
+        createdOn: data.containsKey('createdOn')
+            ? doc.get('createdOn').toDate()
+            : DateTime.now(),
+        grams: data.containsKey('grams') ? data['grams'] : 0,
       );
     }).toList();
   }
