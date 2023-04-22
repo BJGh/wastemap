@@ -1,22 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:calory_calc/models/food_track_task.dart';
-import 'package:calory_calc/component/iconpicker/icon_picker_builder.dart';
-import 'package:calory_calc/utils/charts/datetime_series_chart.dart';
-import 'package:calory_calc/screens/day_view/calory-stats.dart';
-import 'package:provider/provider.dart';
-import 'package:calory_calc/services/database.dart';
-import 'package:openfoodfacts/model/Product.dart';
-import 'package:openfoodfacts/openfoodfacts.dart';
-import 'dart:math';
-import 'dart:async';
-import 'package:calory_calc/utils/theme_colors.dart';
-import 'package:calory_calc/utils/constants.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -25,6 +12,7 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   Position? _currentPosition;
+  MapController _mapController = MapController();
   @override
   void initState() {
     super.initState();
@@ -39,6 +27,75 @@ class _MapScreenState extends State<MapScreen> {
     });
   }
 
+  _showLocationInputDialog(BuildContext context) {
+    TextEditingController customLocationController = TextEditingController();
+
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Add custom location'),
+          content: TextField(
+            controller: customLocationController,
+            decoration: InputDecoration(hintText: "Enter location..."),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                String customLocation = customLocationController.text;
+                _addMarker(customLocation);
+                Navigator.pop(context);
+              },
+              child: Text('Add'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  List<Marker> _markers = [];
+  void _addMarker(String location) async {
+    String apiKey =
+        "49c51d4f6b6f449fafb52110c5f2c6ee"; // replace with your actual API key
+    String url = "https://api.opencagedata.com/geocode/v1/json?q=" +
+        Uri.encodeQueryComponent(location) +
+        "&key=" +
+        apiKey +
+        "&language=en&pretty=1";
+
+    // Make the HTTP request
+    http.Response response = await http.get(Uri.parse(url));
+
+    // Parse the JSON response
+    Map<String, dynamic> jsonResponse = json.decode(response.body);
+    List<dynamic> results = jsonResponse['results'];
+    if (results.length > 0) {
+      Map<String, dynamic> firstResult = results[0];
+      Map<String, dynamic> geometry = firstResult['geometry'];
+      LatLng latLng = LatLng(geometry['lat'], geometry['lng']);
+      setState(() {
+        _markers.add(
+          Marker(
+            width: 50.0,
+            height: 50.0,
+            point: latLng,
+            builder: (ctx) => Container(
+              child: Icon(
+                Icons.location_on,
+                color: Colors.blue,
+              ),
+            ),
+          ),
+        );
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,24 +104,29 @@ class _MapScreenState extends State<MapScreen> {
       ),
       body: Container(
         child: FlutterMap(
-            options:
-                MapOptions(center: LatLng(-12.069783, -77.034057), zoom: 13.0),
-            children: <Widget>[
-              TileLayer(
-                urlTemplate:
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                subdomains: ['a', 'b', 'c'],
-              ),
-              if (_currentPosition != null)
-                MarkerLayer(markers: [
-                  Marker(
-                    point: LatLng(_currentPosition?.latitude ?? 0,
-                        _currentPosition?.longitude ?? 0),
-                    builder: (ctx) =>
-                        Icon(Icons.location_on, color: Colors.red),
-                  ),
-                ]),
-            ]),
+          options: MapOptions(
+            center: _currentPosition == null
+                ? LatLng(-12.069783, -77.034057)
+                : LatLng(
+                    _currentPosition!.latitude, _currentPosition!.longitude),
+            zoom: 13.0,
+          ),
+          children: <Widget>[
+            TileLayer(
+              urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+              subdomains: ['a', 'b', 'c'],
+            ),
+            MarkerLayer(
+              markers: _markers,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showLocationInputDialog(context);
+        },
+        child: Icon(Icons.add_location),
       ),
     );
   }
