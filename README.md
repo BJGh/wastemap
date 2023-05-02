@@ -1,18 +1,22 @@
-# calory_calc
+# WasteMap
 
-A calory calculator app, written on Flutter.
+A ecology, sustainability app, written on Flutter.
 
-## HackNITR 4.0
+## GreenCode Bootcamp 2023
 
-This app is a MedTech product, help people achieve their goals for healthy eating
+GreenCode Bootcamp 2023 winner, this app is a ecological, sustainable product, help people achieve their goals for garbage recycling
 
-App contains 3 screens:
+App contains 4 screens:
 
-daily view - user can provide data about kcals eaten per day. Kcals amount given in chart.
-history - weekly calory statistics.
+daily view - user can provide data about garbage thrown out per day. Garbage amount given in chart.
+history - weekly waste statistics.
 settings - options of the app.
+Map - interactive map where user can set a geotag of chaotic garbage dump, and create the garbage tag. Built with OpenStreetMap and OpenCage.
 
 App was built with flutter, so, this is crossplatform solution. firebase database integrated.
+Fully opensource .
+YouTube demo:
+https://www.youtube.com/watch?v=xufgySC51X4
 
 
 ## Running
@@ -27,6 +31,6 @@ Not starting? Try this:
 
 1. flutter doctor -v : provide info about error in your solutions.
 
-2. Update dart packages, check outdated packages in pubspec.yaml.
+2. Update dart packages, check outdated packages in pubspec.yaml, delete uncompatible packages.
 
 Enjoy!
