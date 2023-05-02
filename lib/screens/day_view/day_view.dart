@@ -21,7 +21,7 @@ class DayViewScreen extends StatefulWidget {
 }
 
 class _DayViewState extends State<DayViewScreen> {
-  String title = 'Add Food';
+  String title = 'Add waste';
   double servingSize = 0;
   String dropdownValue = 'grams';
   DateTime _value = DateTime.now();
@@ -64,7 +64,7 @@ class _DayViewState extends State<DayViewScreen> {
       padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
       child: new Container(
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.white70,
             border: Border(
                 bottom: BorderSide(
               color: Colors.grey.withOpacity(0.5),
@@ -169,6 +169,7 @@ class _DayViewState extends State<DayViewScreen> {
 
   Widget _showAmountHad() {
     return new Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(children: <Widget>[
         _showAddFoodForm(),
         _showUserAmount(),
@@ -182,10 +183,11 @@ class _DayViewState extends State<DayViewScreen> {
       child: Column(children: [
         TextFormField(
           decoration: const InputDecoration(
-              labelText: "Name *", hintText: "Please enter food name"),
+              labelText: "Name *",
+              hintText: "Please enter name or type of waste"),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Please enter the food name";
+              return "Please enter name or type of waste";
             }
             return null;
           },
@@ -196,11 +198,11 @@ class _DayViewState extends State<DayViewScreen> {
         ),
         TextFormField(
           decoration: const InputDecoration(
-              labelText: "Calories *",
-              hintText: "Please enter a calorie amount"),
+              labelText: "Quantity *",
+              hintText: "Please enter a quantity of the waste"),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Please enter a calorie amount";
+              return "Please entera quantity of the waste";
             }
             return null;
           },
@@ -217,10 +219,11 @@ class _DayViewState extends State<DayViewScreen> {
         ),
         TextFormField(
           decoration: const InputDecoration(
-              labelText: "Carbs *", hintText: "Please enter a carbs amount"),
+              labelText: "Weight *",
+              hintText: "Please enter a weight of waste"),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Please enter a carbs amount";
+              return "Please enter a weight of waste";
             }
             return null;
           },
@@ -235,11 +238,10 @@ class _DayViewState extends State<DayViewScreen> {
         ),
         TextFormField(
           decoration: const InputDecoration(
-              labelText: "Protein *",
-              hintText: "Please enter a protein amount"),
+              labelText: "Volume *", hintText: "Please enter a volume amount"),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Please enter a calorie amount";
+              return "Please enter a volume amount";
             }
             return null;
           },
@@ -253,10 +255,11 @@ class _DayViewState extends State<DayViewScreen> {
         ),
         TextFormField(
           decoration: const InputDecoration(
-              labelText: "Fat *", hintText: "Please enter a fat amount"),
+              labelText: "Time of decomposition *",
+              hintText: "Please enter an estimated time of decomposition"),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Please enter a fat amount";
+              return "Please enter an estimated time of decomposition";
             }
             return null;
           },
@@ -311,7 +314,7 @@ class _DayViewState extends State<DayViewScreen> {
             onPressed: () {
               setState(() {
                 _value = _value.subtract(Duration(days: 1));
-                _rightArrowColor = Colors.white;
+                _rightArrowColor = Colors.blueGrey;
               });
             },
           ),
@@ -411,6 +414,7 @@ class _DayViewState extends State<DayViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
             elevation: 0,
             bottom: PreferredSize(
@@ -485,12 +489,8 @@ class FoodTrackTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      leading: CircleAvatar(
-        radius: 25.0,
-        backgroundColor: Color(0xff5FA55A),
-        child: _itemCalories(),
-      ),
-      title: Text(foodTrackEntry.food_name,
+      leading: CircleAvatar(radius: 25.0, backgroundColor: Color(0xff5FA55A)),
+      title: Text("",
           style: TextStyle(
             fontSize: 16.0,
             fontFamily: 'Open Sans',
@@ -508,14 +508,14 @@ class FoodTrackTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(foodTrackEntry.calories.toStringAsFixed(0),
+        Text("",
             style: TextStyle(
               fontSize: 16.0,
               color: Colors.white,
               fontFamily: 'Open Sans',
               fontWeight: FontWeight.w500,
             )),
-        Text('kcal',
+        Text("",
             style: TextStyle(
               fontSize: 10.0,
               color: Colors.white,
@@ -544,7 +544,7 @@ class FoodTrackTile extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Text(' ' + foodTrackEntry.carbs.toStringAsFixed(1) + 'g    ',
+                  Text(' ',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.white,
@@ -560,7 +560,9 @@ class FoodTrackTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                      ' ' + foodTrackEntry.protein.toStringAsFixed(1) + 'g    ',
+                      ' ' +
+                          foodTrackEntry.calories.toStringAsFixed(1) +
+                          'pc.    ',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.white,
@@ -575,7 +577,7 @@ class FoodTrackTile extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Text(' ' + foodTrackEntry.fat.toStringAsFixed(1) + 'g',
+                  Text(' ' + foodTrackEntry.fat.toStringAsFixed(1) + 'l',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.white,
@@ -584,7 +586,7 @@ class FoodTrackTile extends StatelessWidget {
                       )),
                 ],
               ),
-              Text(foodTrackEntry.grams.toString() + 'g',
+              Text(foodTrackEntry.grams.toString() + 'days',
                   style: TextStyle(
                     fontSize: 12.0,
                     color: Colors.white,
@@ -702,7 +704,7 @@ class FoodTrackTile extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xffFA8925)),
             ),
           ),
-          Text('      ' + ((proteinValue) * 100).toStringAsFixed(0) + '%'),
+          Text('    Weight  ' + 'g'),
         ],
       ),
     );
@@ -726,7 +728,7 @@ class FoodTrackTile extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xff01B4BC)),
             ),
           ),
-          Text('      ' + ((fatValue) * 100).toStringAsFixed(0) + '%'),
+          Text(' Volume' + 'l'),
         ],
       ),
     );

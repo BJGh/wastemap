@@ -94,14 +94,14 @@ class CalorieStats extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text('Carbs ',
+                Text('Quantity',
                     style: TextStyle(
                       color: Color(CARBS_COLOR),
                       fontFamily: 'Open Sans',
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     )),
-                Text(macroData[2].toStringAsFixed(1) + 'g',
+                Text(macroData[2].toStringAsFixed(1) + 'pc',
                     style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
                       fontFamily: 'Open Sans',
@@ -113,7 +113,7 @@ class CalorieStats extends StatelessWidget {
             SizedBox(height: 3.0),
             Row(
               children: <Widget>[
-                Text('Protein ',
+                Text('Weight ',
                     style: TextStyle(
                       color: Color(0xffFA8925),
                       fontFamily: 'Open Sans',
@@ -132,14 +132,14 @@ class CalorieStats extends StatelessWidget {
             SizedBox(height: 3.0),
             Row(
               children: <Widget>[
-                Text('Fat ',
+                Text('Volume ',
                     style: TextStyle(
-                      color: Color(0xff01B4BC),
+                      color: Colors.black,
                       fontFamily: 'Open Sans',
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     )),
-                Text(macroData[3].toStringAsFixed(1) + 'g',
+                Text(macroData[3].toStringAsFixed(1) + 'l',
                     style: TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
                       fontFamily: 'Open Sans',
@@ -172,7 +172,7 @@ class CalorieStats extends StatelessWidget {
                   fontFamily: 'Open Sans',
                   fontWeight: FontWeight.w500,
                 )),
-            Text('kcal',
+            Text('amount',
                 style: TextStyle(
                   fontSize: 14.0,
                   color: Colors.white,
@@ -188,7 +188,7 @@ class CalorieStats extends StatelessWidget {
       if (dateCheck()) {
         return Flexible(
           fit: FlexFit.loose,
-          child: Text('Add food to see calorie breakdown.',
+          child: Text('Add waste to see  breakdown.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 40.0,
@@ -198,7 +198,7 @@ class CalorieStats extends StatelessWidget {
       } else {
         return Flexible(
           fit: FlexFit.loose,
-          child: Text('No food added on this day.',
+          child: Text('No waste added on this day.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 40.0,

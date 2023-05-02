@@ -88,7 +88,7 @@ class _DateTimeChart extends State<DateTimeChart> {
             child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Caloric Intake By Date Chart"),
+            Text("Waste production by Date Chart"),
             new Padding(
                 padding: new EdgeInsets.all(32.0),
                 child: new SizedBox(

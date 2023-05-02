@@ -38,6 +38,7 @@ class _CalorieTrackerAppState extends State<CalorieTrackerApp> {
   }
 
   void checkFirstSeen() {
+    Homepage();
     final bool _firstLaunch = true;
     if (_firstLaunch) {
       homeWidget = Homepage();
@@ -128,11 +129,11 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle =
-        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+        IconButton.styleFrom(foregroundColor: Colors.green);
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Flutter Calorie Tracker App",
+            "Flutter WasteMap ",
             style: TextStyle(
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
@@ -141,29 +142,64 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
           children: <Widget>[
             new ListTile(
                 leading: const Icon(Icons.food_bank),
-                title: new Text("Welcome To Calorie Tracker App!",
+                title: new Text("Welcome To WasteMap!",
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontWeight: FontWeight.bold))),
             new ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    shadowColor: Colors.greenAccent,
+                    minimumSize: Size(100, 40)),
                 onPressed: () {
                   onClickDayViewScreenButton(context);
                 },
-                child: Text("Day View Screen")),
+                child: Row(children: [
+                  Text("Day View Screen"),
+                  Icon(Icons.sunny, size: 24.0)
+                ], mainAxisSize: MainAxisSize.min)),
+            new SizedBox(height: 30),
             new ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    shadowColor: Colors.greenAccent,
+                    minimumSize: Size(100, 40)),
                 onPressed: () {
                   onClickHistoryScreenButton(context);
                 },
-                child: Text("History Screen")),
+                child: Row(children: [
+                  Text("History Screen"),
+                  Icon(Icons.auto_graph, size: 24.0)
+                ], mainAxisSize: MainAxisSize.min)),
+            new SizedBox(height: 30),
             new ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    shadowColor: Colors.greenAccent,
+                    minimumSize: Size(100, 40)),
                 onPressed: () {
                   onClickSettingsScreenButton(context);
                 },
-                child: Text("Settings Screen")),
+                child: Row(children: [
+                  Text("Settings Screen"),
+                  Icon(Icons.settings, size: 24.0),
+                ], mainAxisSize: MainAxisSize.min)),
+            new SizedBox(height: 30),
             new ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    shadowColor: Colors.greenAccent,
+                    minimumSize: Size(100, 40)),
                 onPressed: () {
                   onClickMapScreenButton(context);
                 },
-                child: Text("Map"))
+                child: Row(
+                  children: [Text("Map"), Icon(Icons.map, size: 24.0)],
+                  mainAxisSize: MainAxisSize.min,
+                ))
           ],
         ));
   }

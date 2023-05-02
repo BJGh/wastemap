@@ -100,7 +100,7 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('openstreetmap Flutter'),
+        title: Text('WasteMap'),
       ),
       body: Container(
         child: FlutterMap(
