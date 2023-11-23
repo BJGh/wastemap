@@ -1,6 +1,6 @@
 # WasteMap
 
-A ecology, sustainability app, written on Flutter.
+An ecology, sustainability app, written on Flutter.
 
 ## GreenCode Bootcamp 2023
 
@@ -13,7 +13,7 @@ history - weekly waste statistics.
 settings - options of the app.
 Map - interactive map where user can set a geotag of chaotic garbage dump, and create the garbage tag. Built with OpenStreetMap and OpenCage.
 
-App was built with flutter, so, this is crossplatform solution. firebase database integrated.
+App was built with flutter, so, this is crossplatform solution. firebase FireStore integrated.
 Fully opensource .
 YouTube demo:
 https://www.youtube.com/watch?v=xufgySC51X4
