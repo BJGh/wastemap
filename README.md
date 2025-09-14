@@ -1,5 +1,6 @@
 # WasteMap
 
+No available for Public. NDA
 An ecology, sustainability app, written on Flutter.
 
 ## GreenCode Bootcamp 2023
